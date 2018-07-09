@@ -22,7 +22,9 @@ spec:
         imagePullPolicy: Always
         name: mcw-oss-paas-devops
         ports:
-        - containerPort: 3000      
+        - containerPort: 3000
+          hostPort: 3000
+          protocol: TCP
         resources:
           requests:
             cpu: 1000m
@@ -35,5 +37,7 @@ spec:
   type: LoadBalancer
   ports:
   - port: 3000
+    protocol: TCP
+    targetPort: 3000
   selector:
     app: mcw-oss-paas-devops
