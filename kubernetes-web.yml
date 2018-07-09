@@ -2,13 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: web
-  name: web
+    app: mcw-oss-paas-devops
+  name: mcw-oss-paas-devops
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web
+      app: mcw-oss-paas-devops
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,8 +17,8 @@ spec:
   template:
     metadata:
       labels:
-        app: web
-      name: web
+        app: mcw-oss-paas-devops
+      name: mcw-oss-paas-devops
     spec:
       containers:
       - image: bestforyouregistryoss.azurecr.io/best-for-you-organics
@@ -31,7 +31,7 @@ spec:
           timeoutSeconds: 10
           failureThreshold: 3
         imagePullPolicy: Always
-        name: web
+        name: mcw-oss-paas-devops
         ports:
         - containerPort: 3000
           protocol: TCP
@@ -48,22 +48,20 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-imagePullSecrets:
-- name: fabsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: web
-  name: web
+    app: mcw-oss-paas-devops
+  name: mcw-oss-paas-devops
 spec:
   ports:
   - name: web-traffic
-    port: 3000
+    port: 80
     protocol: TCP
     targetPort: 3000
   selector:
-    app: web
+    app: mcw-oss-paas-devops
   sessionAffinity: None
   type: LoadBalancer
