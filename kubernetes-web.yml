@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mcw-oss-paas-devops
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 1
