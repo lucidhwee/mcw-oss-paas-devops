@@ -4,7 +4,7 @@ services:
   mcw-oss-paas-devops:
     image: mcw-oss-paas-devops
     build: .
-      environment:
+    environment:
       NODE_ENV: production
     ports:
       - 3000:3000
