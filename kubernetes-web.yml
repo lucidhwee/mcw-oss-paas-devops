@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mcw-oss-paas-devops
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,7 +15,7 @@ spec:
         app: mcw-oss-paas-devops
     spec:
       containers:
-      - image: bestforyouregistryoss.azurecr.io/best-for-you-organics
+      - image: bestforyouregistryoss.azurecr.io/best-for-you-organics:latest
         env:
         - name: NODE_ENV
           value: production
@@ -26,16 +26,14 @@ spec:
         resources:
           requests:
             cpu: 1000m
-            memory: 128Mi
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mcw-oss-paas-devops
 spec:
+  type: LoadBalancer
   ports:
   - port: 3000
   selector:
     app: mcw-oss-paas-devops
-  type: LoadBalancer
